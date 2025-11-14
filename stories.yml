@@ -1,0 +1,245 @@
+version: "3.1"
+
+stories:
+
+# Core conversation flows
+
+- story: Bot capabilities inquiry
+  steps:
+  - intent: bot_capabilities
+  - action: utter_bot_capabilities
+
+- story: Time estimation request
+  steps:
+  - intent: time_estimation
+  - action: utter_processing_time
+
+- story: Subject analysis flow
+  steps:
+  - intent: subject_analysis
+  - action: utter_ask_subject_details
+  - intent: inform
+    entities:
+      - subject: "Mathematics"
+  - action: action_provide_subject_insights
+  
+- story: Happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: Unhappy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+
+
+- story: Unresolved unhappy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+
+
+
+- story: Document analysis flow
+  steps:
+  - intent: upload_question_paper
+  - action: utter_ask_document_upload
+  - intent: inform
+  - action: action_handle_file_upload
+  - slot_was_set:
+      - uploaded_file
+  - action: action_analyze_question_paper
+  - intent: predictive_analysis
+  - action: action_generate_analysis
+
+- story: Denied document analysis
+  steps:
+  - intent: predictive_analysis
+  - action: utter_confirm_document_uploaded
+  - intent: deny
+  - action: utter_ask_reupload
+
+# Study planning flows  
+
+
+- story: Valid study plan creation
+  steps:
+  - intent: study_plan
+  - action: study_plan_form
+  - active_loop: study_plan_form
+  - slot_was_set:
+    - study_duration: 30
+    - selected_subject: "Mathematics"
+    - difficulty_level: "medium"
+  - action: study_plan_form
+  - active_loop: null
+  - action: action_create_study_plan
+
+- story: Invalid study plan duration
+  steps:
+  - intent: study_plan
+  - action: study_plan_form
+  - active_loop: study_plan_form
+  - slot_was_set:
+    - study_duration: 400
+  - action: study_plan_form
+  - active_loop: null
+  - action: utter_ask_study_duration
+
+
+- story: Mock test generation
+  steps:
+  - intent: mock_tests
+  - action: mock_test_form
+  - active_loop: mock_test_form
+  - slot_was_set:
+    - question_count: 20
+    - time_limit: 60
+    - difficulty_level: "medium"
+  - action: mock_test_form
+  - active_loop: null
+  - action: action_generate_mock_test
+
+# Error handling flows
+- story: Persistent error handling
+  steps:
+  - intent: error_handling
+  - action: utter_apology
+  - action: utter_offer_help
+  - intent: error_handling
+  - action: action_escalate_human
+
+# Authentication flows
+- story: Password reset flow
+  steps:
+  - intent: login_help
+  - action: utter_login_help
+  - intent: inform
+    entities:
+      - email: "user@example.com"
+  - action: action_send_password_reset
+  - action: utter_offer_more_assistance
+
+# Navigation flows
+- story: Successful page navigation
+  steps:
+  - intent: navigate_website
+    entities:
+      - page: "study materials"
+  - action: action_handle_navigation
+
+- story: Generic page request
+  steps:
+  - intent: navigate_website
+  - action: utter_ask_specific_page
+  - intent: inform
+    entities:
+      - page: "FAQ"
+  - action: action_handle_navigation
+
+- story: Positive feedback
+  steps:
+    - intent: feedback
+      entities:
+        - feedback_type: "positive"
+    - action: utter_thanks
+    - action: action_store_feedback
+
+
+- story: User thanks the bot
+  steps:
+    - intent: thanks
+    - action: utter_thanks
+
+- story: User thanks after successful interaction
+  steps:
+    - intent: upload_question_paper
+    - action: utter_ask_document_upload
+    - intent: inform
+    - action: action_analyze_question_paper
+    - intent: thanks
+    - action: utter_thanks
+
+- story: User asks for help
+  steps:
+  - intent: help
+  - action: utter_help_options
+
+- story: Negative feedback
+  steps:
+    - intent: feedback
+      entities:
+        - feedback_type: "negative"
+    - action: utter_apology
+    - action: action_store_feedback
+
+- story: Positive feedback handling
+  steps:
+  - intent: positive_feedback
+  - action: utter_positive_feedback_response
+  - action: action_store_feedback
+
+- story: Negative feedback handling
+  steps:
+  - intent: negative_feedback
+  - action: utter_negative_feedback_response
+  - action: action_store_feedback
+  - action: utter_offer_help
+
+# Small talk flows
+
+
+- story: General small talk
+  steps:
+  - intent: general_small_talk
+  - action: action_handle_small_talk
+
+- story: Privacy policy inquiry
+  steps:
+  - intent: privacy_concerns
+  - action: utter_privacy_policy
+
+- story: Analysis methodology explanation
+  steps:
+    - intent: analysis_parameters
+    - action: utter_analysis_methodology
+
+- story: Supported formats inquiry
+  steps:
+    - intent: document_format
+    - action: utter_supported_formats
+
+- story: Profile Navigation
+  steps:
+  - intent: profile_navigation_issue
+  - action: utter_profile_navigation
+
+
+- story: General help request
+  steps:
+    - intent: help
+    - action: utter_help_options
+    - intent: inform
+    - action: action_provide_specific_help
+    
+
+# Fallback flows
+- story: Fallback story
+  steps:
+  - intent: out_of_scope
+  - action: utter_default

@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Virtualenv
+venv/
+.env
+env/
+ENV/
+
+# Rasa & model artifacts
+models/
+.rasa/
+db.sqlite3
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store

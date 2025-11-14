@@ -1,0 +1,320 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - Hello
+    - Hi
+    - Hey there
+    - Good morning
+    - Good evening
+    - What's up?
+    - Greetings
+    - Hi bot
+    - Hello there
+    - Hey chatbot
+
+- intent: bot_challenge
+  examples: |
+    - Are you a bot?
+    - Are you human?
+    - What are you?
+- intent: feedback
+  examples: |
+    - This was helpful
+    - good bot
+    - Bad bot
+    - You are great!
+
+
+- intent: goodbye
+  examples: |
+    - Bye
+    - Goodbye
+    - See you later
+    - Have a great day
+    - Catch you later
+    - I'm leaving now
+    - Talk to you soon
+    - Bye for now
+    - Farewell
+    - Signing off
+
+- intent: thanks
+  examples: |
+    - Thanks
+    - Thank you
+    - I appreciate it
+    - Much obliged
+    - Thanks a lot
+    - Thank you very much
+    - Many thanks
+    - I'm grateful
+    - Appreciate your help
+    - Thanks a bunch
+
+- intent: bot_capabilities
+  examples: |
+    - What can you do?
+    - Tell me your features
+    - How can you help me?
+    - What is your purpose?
+    - Explain your functionalities
+    - What are you capable of?
+    - List your skills
+    - Describe your abilities
+    - What services do you offer?
+    - Can you analyze question papers?
+
+
+
+- intent: navigate_website
+  examples: |
+    - Take me to the [homepage](page)
+    - Navigate to the [contact](page) page
+    - Show me the [about us](page) section
+    - Where is the [FAQ](page) page?
+    - Open the [resources](page)
+    - Go to the [pricing](page) section
+    - I want to see the [blog](page)
+    - Access the [study materials](page)
+    - Where can I find the [support](page) page?
+    - Show me the [dashboard](page)
+
+- intent: login_help
+  examples: |
+    - How do I log in?
+    - I forgot my password
+    - Help me reset my password
+    - I need to change my email
+    - Can I delete my account?
+    - Login assistance
+    - Password recovery
+    - Account access issues
+    - Change my login details
+    - Update my credentials
+
+- intent: upload_question_paper
+  examples: |
+    - I want to upload a question paper
+    - Can you analyze this [exam paper](document_type)?
+    - Check this [PDF](document_type) for common questions
+    - Find repeated questions in this document
+    - Analyze this [exam paper](document_type)
+    - Here's a test paper to evaluate
+    - Process this [question document](document_type)
+    - Scan my exam paper
+    - Review this [quiz paper](document_type)
+    - Examine this test 
+    
+
+
+- intent: affirm
+  examples: |
+    - Yes
+    - Absolutely
+    - Sure thing
+
+- intent: deny
+  examples: |
+    - No
+    - Not really
+    - I don't think so
+
+- intent: inform
+  examples: |
+    - My email is user@example.com
+    - I'm having trouble with my login
+
+- intent: mood_great
+  examples: |
+    - I'm feeling great today!
+    - Everything is awesome
+
+- intent: mood_unhappy
+  examples: |
+    - I'm not feeling well
+    - I feel sad
+
+- intent: predictive_analysis
+  examples: |
+    - What are the most repeated questions?
+    - Predict the most likely questions for the [next exam](document_type)
+    - Show trending topics from previous years
+    - What topics are frequently asked?
+    - Identify high-weightage topics
+    - Which concepts appear most often?
+    - What should I focus on based on [past papers](document_type)?
+    - Give me the most probable exam questions
+    - Show me recurring patterns in exams
+    - What are the examiners' favorite topics?
+
+- intent: subject_analysis
+  examples: |
+    - What are the key topics in [Mathematics](subject)?
+    - Show important questions in [Physics](subject)
+    - Find commonly asked [Chemistry](subject) equations
+    - What are the most frequent [programming](subject) questions?
+    - Give me a summary of important [Biology](subject) concepts
+    - Analyze [Computer Science](subject) past papers
+    - What's important in [Economics](subject) exams?
+    - Highlight key [History](subject) topics
+    - Breakdown [Engineering](subject) questions
+    - Summarize [Literature](subject) exam patterns
+
+- intent: study_plan
+  examples: |
+    - Create a study plan for me
+    - Help me create a [30 day](study_duration) study plan
+    - Suggest a revision schedule based on past exams
+    - What should I focus on for my [upcoming test](document_type)?
+    - How do I prepare based on [past papers](document_type)?
+    - Guide me in making a study timetable
+    - Create a personalized [2 week](study_duration) schedule
+    - Recommend a preparation strategy for [Mathematics](subject)
+    - Design a learning roadmap
+    - Make me a [90 day](study_duration) revision plan
+    - Organize my study sessions
+
+- intent: exam_preparation_tips
+  examples: |
+    - How do I prepare for exams effectively?
+    - Give me tips for last-minute revision
+    - What are some good study techniques?
+    - How do I manage time during [3 hour](time_limit) exams?
+    - Suggest a method to memorize key concepts
+    - Best ways to study for [physics](subject) tests
+    - Exam success strategies
+    - How to avoid exam stress
+    - Techniques for better retention
+    - Ways to improve exam performance
+
+- intent: mock_tests
+  examples: |
+    - Do you have any [20 question](question_count) mock tests?
+    - Generate a [medium difficulty](difficulty_level) sample test
+    - Provide me with a [1 hour](time_limit) practice test
+    - Can you create a quiz from [2023 papers](document_type)?
+    - I want to test myself with [past exam](document_type) questions
+    - Give me an [advanced level](difficulty_level) exam simulation
+    - Prepare a [chapter-wise](document_type) practice exam
+    - Make a [50 question](question_count) test for me to try
+    - I need a [biology](subject) sample quiz
+    - Create an [engineering mathematics](subject) assessment
+
+- intent: general_small_talk
+  examples: |
+    - Tell me a joke
+    - Who is your creator?
+    - Do you like humans?
+    - What's your favorite book?
+    - Can you sing?
+    - How old are you?
+    - What do you think about AI?
+    - Do you dream?
+    - What's the weather today?
+    - Are you happy?
+
+- intent: help
+  examples: |
+    - I need help
+    - How do I use this chatbot?
+    - Guide me through this system
+    - I am confused, what do I do?
+    - Where can I find more information?
+    - Assist me please
+    - Can you help me?
+    - I don't understand
+    - Show me how this works
+    - Instructions please
+
+- intent: profile_navigation_issue
+  examples: |
+    - How can i access my profile?
+    - Where can i view my profile ?
+    - Where can i see my details?
+    - How to change my profile info?
+    - Where is my profile located?
+    - I can't find my profile.
+
+- intent: error_handling
+  examples: |
+    - You are not understanding me
+    - That's not what I meant
+    - You gave the wrong answer
+    - Try again
+    - I think something went wrong
+    - That's incorrect
+    - Not what I asked for
+    - You misunderstood
+    - Please clarify
+    - Can you rephrase that?
+
+- intent: document_format
+  examples: |
+    - What file formats do you accept?
+    - Can I upload [Word documents](document_type)?
+    - Do you take [scanned PDFs](document_type)?
+    - What types of files can I submit?
+    - Is [OCR](document_type) supported?
+    - Will [handwritten](document_type) papers work?
+    - Supported document types
+    - File format requirements
+    - Can you read [image files](document_type)?
+    - What [extensions](document_type) are allowed?
+
+- intent: analysis_parameters
+  examples: |
+    - How far back does your analysis go?
+    - What's your sample size?
+    - How many papers do you compare?
+    - What's your confidence level?
+    - How accurate are your predictions?
+    - What's your methodology?
+    - Explain your analysis process
+    - What data do you use?
+    - How reliable are your results?
+    - Describe your algorithm
+
+- intent: privacy_concerns
+  examples: |
+    - Is my data secure?
+    - What do you do with my documents?
+    - Are papers stored permanently?
+    - How is my privacy protected?
+    - Delete my uploaded files
+    - Your data policy
+    - Where are files processed?
+    - Who can access my papers?
+    - Data retention period
+    - What [GDPR](document_type) measures do you have?
+
+- intent: positive_feedback
+  examples: |
+    - The service was excellent!
+    - Great job with the analysis
+    - This helped me a lot
+    - [positive](feedback_type) feedback
+    - I love this feature
+
+- intent: negative_feedback
+  examples: |
+    - The results were inaccurate
+    - This didn't work properly
+    - [negative](feedback_type) experience
+    - The analysis was wrong
+    - Needs improvement
+
+
+- intent: time_estimation
+  examples: |
+    - How long does [PDF analysis](document_type) take?
+    - When will [chemistry paper](subject) results be ready?
+    - Is [DOCX processing](document_type) instant?
+    - What's the processing time for [50 pages](document_type)?
+    - Can you hurry up?
+    - Speed up the analysis
+    - Why is [my document](document_type) taking so long?
+    - Estimated completion time for [physics test](subject)
+    - Processing duration
+    - When can I expect [biology results](subject)?

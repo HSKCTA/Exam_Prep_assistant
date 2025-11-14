@@ -1,0 +1,244 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - thanks
+  - inform
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - bot_capabilities
+  - navigate_website
+  - upload_question_paper
+  - predictive_analysis
+  - login_help
+  - subject_analysis
+  - study_plan
+  - exam_preparation_tips
+  - mock_tests
+  - general_small_talk
+  - help
+  - error_handling
+  - document_format
+  - analysis_parameters
+  - privacy_concerns
+  - feedback
+  - positive_feedback
+  - negative_feedback
+  - time_estimation
+  - profile_navigation_issue
+
+entities:
+  - subject
+  - page
+  - difficulty
+  - number
+  - document_type
+
+slots:
+
+  duration:
+    type: float
+    mappings:
+      - type: from_entity
+        entity: number
+
+
+  uploaded_file:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+
+  current_page:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: page
+
+  study_duration:
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: number
+
+
+  question_count:
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: number
+
+  time_limit:
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: number
+        slots:
+
+  selected_subject:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: subject
+        intent: mock_tests
+
+  difficulty_level:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: difficulty
+        intent: mock_tests
+
+
+responses:
+ # Add missing utterances
+  utter_ask_reupload:
+    - text: "Could you please upload the document again?"
+
+  utter_default:
+    - text: "I'm not sure how to help with that. Could you rephrase?"
+
+
+  utter_privacy_policy:  # Now used in stories
+    - text: "Your documents are deleted after 24 hours and encrypted during processing"
+
+
+  utter_ask_mock_test_params:
+    - text: "Please specify:\n1. Number of questions\n2. Time limit\n3. Difficulty level"
+      buttons:
+        - title: "10"
+          payload: "/inform{\"question_count\":10}"
+        - title: "20"
+          payload: "/inform{\"question_count\":20}"
+
+ 
+  utter_cheer_up:
+    - text: "Here is something to cheer you up:"
+      image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+    - text: "Did that help you?"
+
+  utter_happy:
+    - text: "Great, carry on!"
+
+  utter_iamabot:
+    - text: "I am a bot, powered by Rasa."
+
+  utter_greet:
+    - text: "Hello! How can I assist you today?"
+    - text: "Hi there! Ready to ace your exams?"
+    - text: "Welcome back! How can I help?"
+
+  utter_goodbye:
+    - text: "Goodbye! Feel free to return if you need more help."
+    - text: "See you later! Good luck with your studies!"
+
+
+  utter_profile_navigation:
+    - text: "To access your profile, click on the top-right icon and then select 'Profile'."
+
+  utter_thanks:
+    - text: "You're welcome! Let me know if you need anything else."
+
+  utter_bot_capabilities:
+    - text: "I can help with: \n- Analyzing question papers\n- Predicting important topics\n- Creating study plans\n- Generating mock tests\n- Navigating website content\nAsk me anything about exam preparation!"
+
+  utter_ask_specific_page:
+    - text: "Which section would you like to visit?\n1. Study Materials\n2. Practice Tests\n3. Analysis Reports\n4. Account Settings"
+
+  utter_ask_document_upload:
+    - text: "Please upload your question paper (PDF/DOCX format)"
+
+  utter_confirm_document_uploaded:
+    - text: "I have your document. Would you like me to analyze it now?"
+
+  utter_ask_subject_details:
+    - text: "Which subject would you like to analyze?"
+
+  utter_ask_study_duration:
+    - text: "How many days do you have for preparation?"
+
+  utter_supported_formats:
+    - text: "I support both PDF and DOCX formats. Scanned documents should be searchable PDFs."
+
+  utter_analysis_methodology:
+    - text: "I analyze papers using:\n- Topic frequency analysis\n- Question pattern recognition\n- Historical trend comparison\nResults are 85%+ accurate based on test data"
+
+  utter_processing_time:
+    - text: "Analysis typically takes 1-2 minutes depending on document size"
+
+  utter_help_options:
+    - text: "I can help with:\n- Document analysis\n- Study planning\n- Website navigation\nWhat do you need assistance with?"
+
+  utter_apology:
+    - text: "I apologize for the confusion. Let me try to help again."
+
+
+
+  utter_login_help:
+    - text: "I can help you with login issues. Please describe your problem."
+
+  utter_offer_more_assistance:
+    - text: "Is there anything else I can assist you with?"
+
+  utter_offer_help:
+    - text: "I'm here to help! What do you need assistance with?"
+    
+  utter_positive_feedback_response:
+    - text: "Thank you for your kind feedback! We're glad to help."
+  
+  utter_negative_feedback_response:
+    - text: "We apologize for the inconvenience. Your feedback helps us improve."
+  
+
+actions:
+  - action_handle_navigation
+  - action_provide_specific_help  # Was missing
+  - action_generate_analysis
+  - action_escalate_human
+  - action_provide_subject_insights
+  - action_create_study_plan
+  - action_provide_study_tips
+  - action_generate_mock_test
+  - action_store_feedback
+  - action_handle_small_talk
+  - action_validate_study_duration
+  - action_handle_file_upload
+  - validate_study_plan_form
+  - validate_mock_test_form
+  - action_send_password_reset
+  - action_analyze_question_paper
+  
+ 
+
+  
+
+
+forms:
+  study_plan_form:
+    required_slots:
+      - study_duration  # Changed from 'duration' to match slot name
+      - selected_subject
+    ignored_intents:
+      - greet
+      - goodbye
+
+
+  mock_test_form:
+    required_slots:
+      - question_count
+      - time_limit
+      - difficulty_level
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
