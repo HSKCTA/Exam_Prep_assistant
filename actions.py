@@ -309,7 +309,7 @@ class ActionAnalyzeQuestionPaper(Action):
                         cluster.append(j)
                         visited[j] = True
                 clusters.append(cluster)
-        # Pick representative question from each cluster
+
         representatives = []
         for cluster in clusters:
             representatives.append(question_texts[cluster[0]])
@@ -400,8 +400,7 @@ class ActionAnalyzeQuestionPaper(Action):
         plt.close()
         return image_path
 
-# Remaining action classes (StudyPlan, MockTest, etc.) with similar improvements
-# [Include all other action classes from previous version with enhanced error handling]
+
 
 class ValidateMockTestForm(FormValidationAction):
     def name(self) -> Text:
@@ -448,13 +447,12 @@ class ActionStoreFeedback(Action):
         feedback_type = next(tracker.get_latest_entity_values("feedback_type"), "general")
         feedback_text = tracker.latest_message.get('text')
         
-        # Store feedback with type classification
         with open("feedback.txt", "a") as f:
             f.write(f"{datetime.now()} - {feedback_type} - {feedback_text}\n")
         
         return []
 
-# [Include other form validation classes with similar enhancements]
+
 
 class ValidateStudyPlanForm(FormValidationAction):
     def name(self) -> Text:
