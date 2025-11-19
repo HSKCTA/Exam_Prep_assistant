@@ -1,20 +1,3 @@
-#!/usr/bin/env python3
-"""
-sppu_scraper.py
-
-Table-aware scraper for sppuquestionpapers.com.
-
-Features:
-- Build dept/semester URL from user input
-- Inspect all <table> elements on the page
-- Heuristically match table headers to requested subject and pattern
-- Extract direct PDF links from matched tables
-- Simple CLI for testing: prints matches and writes sppu_result.json
-
-Drop this file into your project and call:
-    python sppu_scraper.py --department "Computer Engineering" --semester "Sem 5" --subject "Database Management Systems" --pattern 2019
-"""
-
 import re
 import json
 import argparse
@@ -30,7 +13,6 @@ USER_AGENT = {"User-Agent": "Mozilla/5.0 (compatible; SPPUScraper/1.0)"}
 REQUEST_TIMEOUT = 15  # seconds
 LOG_LEVEL = logging.INFO
 
-# Minimal department slug map: extend this as needed
 DEPT_SLUGS = {
     "computer engineering": "computer-engineering",
     "cse": "computer-engineering",
@@ -71,7 +53,7 @@ def build_sppu_url(department: str, semester: str) -> str:
     dept_norm = normalize(department)
     dept_slug = DEPT_SLUGS.get(dept_norm)
     if not dept_slug:
-        # fallback: convert spaces to hyphens, remove extra chars
+        
         dept_slug = dept_norm.replace(" ", "-")
         logger.debug(f"No canonical slug found; falling back to '{dept_slug}'")
     sem_slug = semester_to_slug(semester)
@@ -113,7 +95,6 @@ def _get_table_header_text(table: Tag) -> str:
         prev = prev.previous_sibling
         steps += 1
 
-    # 4) look for previous heading in parent
     parent = table.parent
     if parent:
         heading = parent.find_previous(lambda tag: tag.name in ("h1", "h2", "h3", "h4"))
@@ -130,12 +111,12 @@ def _score_table_match(header_text: str, subject_query: str, pattern_query: str 
     h = normalize(header_text)
     s = normalize(subject_query)
 
-    # fuzzy similarity
+
     subj_score = difflib.SequenceMatcher(None, s, h).ratio()
     if s and s in h:
         subj_score = max(subj_score, 0.85)
 
-    # pattern handling (year)
+
     pat_score = 0.0
     if pattern_query:
         year_match = re.search(r'((?:19|20)\d{2})', str(pattern_query))
@@ -189,11 +170,10 @@ def extract_pdfs_from_table(table_tag: Tag, base_url: str) -> List[str]:
         if href.lower().endswith(".pdf"):
             pdfs.append(urljoin(base_url, href))
         else:
-            # if anchor text looks like 'Download' but href is not a pdf, skip for speed.
-            # (Optionally follow the link in a HEAD/GET to confirm, but avoid heavy IO here.)
+          
             continue
 
-    # dedupe preserving order
+
     seen = set()
     out = []
     for u in pdfs:
@@ -229,7 +209,6 @@ def get_papers_from_sppu_tables(department: str, semester: str, subject: str, pa
             matched_headers.append(header_text)
             matched_table_urls.append(main_url)
 
-    # dedupe PDFs while preserving order
     seen = set()
     unique_pdfs = []
     for p in all_pdfs:
