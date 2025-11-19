@@ -1,3 +1,4 @@
+# This is your new, clean domain.yml file
 version: "3.1"
 
 intents:
@@ -7,237 +8,220 @@ intents:
   - inform
   - affirm
   - deny
+  - time_estimation
   - mood_great
   - mood_unhappy
   - bot_challenge
+  - feedback
   - bot_capabilities
+  - request_paper_analysis
   - navigate_website
+  - login_help
   - upload_question_paper
   - predictive_analysis
-  - login_help
   - subject_analysis
   - study_plan
   - exam_preparation_tips
   - mock_tests
   - general_small_talk
   - help
+  - profile_navigation_issue
   - error_handling
   - document_format
   - analysis_parameters
   - privacy_concerns
-  - feedback
   - positive_feedback
   - negative_feedback
-  - time_estimation
-  - profile_navigation_issue
+  - out_of_scope # This was missing from stories.yml
 
 entities:
-  - subject
-  - page
-  - difficulty
+  - department
+  - semester
+  - pattern
   - number
+  - page
+  - subject
+  - difficulty
   - document_type
+  - email
+  - feedback_type
+  - study_duration
+  - difficulty_level
+  - question_count
+  - time_limit
+  - selected_subject # Added to fix form errors
 
 slots:
-
+  department:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: department
+  semester:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: semester
+  pattern:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: pattern
   duration:
     type: float
     mappings:
       - type: from_entity
         entity: number
-
-
   uploaded_file:
     type: text
     influence_conversation: false
     mappings:
       - type: from_text
-
   current_page:
     type: text
     influence_conversation: true
     mappings:
       - type: from_entity
         entity: page
-
   study_duration:
     type: float
     influence_conversation: true
     mappings:
       - type: from_entity
-        entity: number
-
-
+        entity: study_duration
   question_count:
     type: float
     influence_conversation: true
     mappings:
       - type: from_entity
-        entity: number
-
+        entity: question_count
   time_limit:
     type: float
     influence_conversation: true
     mappings:
       - type: from_entity
-        entity: number
-        slots:
-
+        entity: time_limit
   selected_subject:
     type: text
     mappings:
       - type: from_entity
-        entity: subject
-        intent: mock_tests
+        entity: selected_subject
 
   difficulty_level:
     type: text
     mappings:
       - type: from_entity
-        entity: difficulty
-        intent: mock_tests
-
+        entity: difficulty_level
 
 responses:
- # Add missing utterances
-  utter_ask_reupload:
-    - text: "Could you please upload the document again?"
-
-  utter_default:
-    - text: "I'm not sure how to help with that. Could you rephrase?"
-
-
-  utter_privacy_policy:  # Now used in stories
-    - text: "Your documents are deleted after 24 hours and encrypted during processing"
-
-
-  utter_ask_mock_test_params:
-    - text: "Please specify:\n1. Number of questions\n2. Time limit\n3. Difficulty level"
-      buttons:
-        - title: "10"
-          payload: "/inform{\"question_count\":10}"
-        - title: "20"
-          payload: "/inform{\"question_count\":20}"
-
- 
-  utter_cheer_up:
-    - text: "Here is something to cheer you up:"
-      image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_did_that_help:
-    - text: "Did that help you?"
-
-  utter_happy:
-    - text: "Great, carry on!"
-
-  utter_iamabot:
-    - text: "I am a bot, powered by Rasa."
-
+  # --- Core Responses ---
   utter_greet:
     - text: "Hello! How can I assist you today?"
     - text: "Hi there! Ready to ace your exams?"
     - text: "Welcome back! How can I help?"
-
   utter_goodbye:
     - text: "Goodbye! Feel free to return if you need more help."
     - text: "See you later! Good luck with your studies!"
-
-
+  utter_iamabot:
+    - text: "I am a bot, powered by Rasa."
+  utter_happy:
+    - text: "Great, carry on!"
+  utter_cheer_up:
+    - text: "Here is something to cheer you up:"
+      image: "https://i.imgur.com/nGF1K8f.jpg"
+  utter_did_that_help:
+    - text: "Did that help you?"
+  utter_ask_department:
+    - text: "Which department? (e.g. Computer Engineering, IT)"
+  utter_ask_semester:
+    - text: "Which semester? (e.g. sem 3)"
+  utter_ask_selected_subject:
+    - text: "Which subject do you want me to analyze?"
+  utter_ask_pattern:
+    - text: "Which exam insem/endsem/ of which pattern 2019/2015 pattern? (e.g. Insem 2019 pattern)"
+  utter_thanks:
+    - text: "You're welcome! Let me know if you need anything else."
+  utter_default:
+    - text: "I'm not sure how to help with that. Could you rephrase?"
+  utter_help_options:
+    - text: "I can help with:\n- Document analysis\n- Study planning\n- Website navigation\nWhat do you need assistance with?"
+  
+  # --- Feature Responses ---
+  utter_bot_capabilities:
+    - text: "I can help with: \n- Analyzing question papers\n- Predicting important topics\n- Creating study plans\n- Generating mock tests\n- Navigating website content\nAsk me anything about exam preparation!"
+  utter_processing_time:
+    - text: "Analysis typically takes 1-2 minutes depending on document size"
+  utter_ask_document_upload:
+    - text: "Please upload your question paper (PDF/DOCX format)"
+  utter_confirm_document_uploaded:
+    - text: "I've received your document. Would you like me to analyze it?"
+  utter_ask_reupload:
+    - text: "Could you please upload the document again?"
+  utter_ask_study_duration:
+    - text: "How many days do you have for preparation?"
+  utter_exam_preparation_tips:
+    - text: "Here are some quick tips: 1. Review past papers. 2. Focus on high-frequency topics. 3. Make short notes for revision. 4. Don't forget to get good sleep!"
+  utter_privacy_policy:
+    - text: "Your documents are deleted after 24 hours and encrypted during processing"
+  utter_analysis_methodology:
+    - text: "I analyze papers using:\n- Topic frequency analysis\n- Question pattern recognition\n- Historical trend comparison."
+  utter_supported_formats:
+    - text: "I support both PDF and DOCX formats. Scanned documents should be searchable PDFs."
   utter_profile_navigation:
     - text: "To access your profile, click on the top-right icon and then select 'Profile'."
 
-  utter_thanks:
-    - text: "You're welcome! Let me know if you need anything else."
-
-  utter_bot_capabilities:
-    - text: "I can help with: \n- Analyzing question papers\n- Predicting important topics\n- Creating study plans\n- Generating mock tests\n- Navigating website content\nAsk me anything about exam preparation!"
-
+  # --- DEAD CODE (Can be deleted, but harmless) ---
+  utter_positive_feedback_response:
+    - text: "Thank you for your kind feedback! We're glad to help."
+  utter_negative_feedback_response:
+    - text: "We apologize for the inconvenience. Your feedback helps us improve."
   utter_ask_specific_page:
-    - text: "Which section would you like to visit?\n1. Study Materials\n2. Practice Tests\n3. Analysis Reports\n4. Account Settings"
-
-  utter_ask_document_upload:
-    - text: "Please upload your question paper (PDF/DOCX format)"
-
-  utter_confirm_document_uploaded:
-    - text: "I have your document. Would you like me to analyze it now?"
-
-  utter_ask_subject_details:
-    - text: "Which subject would you like to analyze?"
-
-  utter_ask_study_duration:
-    - text: "How many days do you have for preparation?"
-
-  utter_supported_formats:
-    - text: "I support both PDF and DOCX formats. Scanned documents should be searchable PDFs."
-
-  utter_analysis_methodology:
-    - text: "I analyze papers using:\n- Topic frequency analysis\n- Question pattern recognition\n- Historical trend comparison\nResults are 85%+ accurate based on test data"
-
-  utter_processing_time:
-    - text: "Analysis typically takes 1-2 minutes depending on document size"
-
-  utter_help_options:
-    - text: "I can help with:\n- Document analysis\n- Study planning\n- Website navigation\nWhat do you need assistance with?"
-
-  utter_apology:
-    - text: "I apologize for the confusion. Let me try to help again."
-
-
-
+    - text: "Which section would you like to visit?"
+  utter_offer_help:
+    - text: "I'm here to help! What do you need assistance with?"
   utter_login_help:
     - text: "I can help you with login issues. Please describe your problem."
-
+  utter_ask_subject_details:
+    - text: "Which subject would you like to analyze?"
+  utter_apology:
+    - text: "I apologize for the confusion. Let me try to help again."
   utter_offer_more_assistance:
     - text: "Is there anything else I can assist you with?"
 
-  utter_offer_help:
-    - text: "I'm here to help! What do you need assistance with?"
-    
-  utter_positive_feedback_response:
-    - text: "Thank you for your kind feedback! We're glad to help."
-  
-  utter_negative_feedback_response:
-    - text: "We apologize for the inconvenience. Your feedback helps us improve."
-  
-
+# This 'actions' list is now 100% correct
+# It matches your actions.py file
 actions:
+  - action_fetch_and_analyze
   - action_handle_navigation
-  - action_provide_specific_help  # Was missing
-  - action_generate_analysis
-  - action_escalate_human
-  - action_provide_subject_insights
-  - action_create_study_plan
-  - action_provide_study_tips
   - action_generate_mock_test
-  - action_store_feedback
-  - action_handle_small_talk
-  - action_validate_study_duration
-  - action_handle_file_upload
-  - validate_study_plan_form
-  - validate_mock_test_form
-  - action_send_password_reset
   - action_analyze_question_paper
+  - action_store_feedback
+
+  - validate_mock_test_form
+  - validate_study_plan_form
+  - validate_paper_analysis_form  
   
- 
-
-  
-
-
 forms:
-  study_plan_form:
+  paper_analysis_form:
     required_slots:
-      - study_duration  # Changed from 'duration' to match slot name
+      - department
+      - semester
       - selected_subject
-    ignored_intents:
-      - greet
-      - goodbye
+      - pattern
 
-
+      
   mock_test_form:
     required_slots:
       - question_count
       - time_limit
       - difficulty_level
+  study_plan_form:
+    required_slots:
+      - study_duration
+      - selected_subject
+    ignored_intents:
+      - greet
+      - goodbye
 
 session_config:
   session_expiration_time: 60

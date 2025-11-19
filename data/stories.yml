@@ -1,0 +1,125 @@
+version: "3.1"
+
+stories:
+
+# Core conversation flows
+
+- story: Bot capabilities inquiry
+  steps:
+  - intent: bot_capabilities
+  - action: utter_bot_capabilities
+
+- story: Full paper analysis flow
+  steps:
+  - intent: request_paper_analysis
+  - action: paper_analysis_form     
+  - active_loop: paper_analysis_form
+  - active_loop: null                
+  - action: action_fetch_and_analyze 
+
+
+- story: Time estimation request
+  steps:
+  - intent: time_estimation
+  - action: utter_processing_time
+  
+- story: Happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: Unhappy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+
+
+- story: Unresolved unhappy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+
+- story: Document analysis flow
+  steps:
+  - intent: upload_question_paper
+  - action: utter_ask_document_upload
+  - intent: inform
+  - action: action_analyze_question_paper
+
+- story: Denied document analysis
+  steps:
+  - intent: predictive_analysis
+  - action: utter_confirm_document_uploaded
+  - intent: deny
+  - action: utter_ask_reupload
+
+
+- story: Mock test generation
+  steps:
+  - intent: mock_tests
+  - action: mock_test_form
+  - active_loop: mock_test_form
+  - slot_was_set:
+    - question_count: 20
+    - time_limit: 60
+    - difficulty_level: "medium"
+  - action: mock_test_form
+  - active_loop: null
+  - action: action_generate_mock_test
+
+
+
+
+- story: User thanks the bot
+  steps:
+    - intent: thanks
+    - action: utter_thanks
+
+
+- story: User asks for exam tips
+  steps:
+  - intent: exam_preparation_tips
+  - action: utter_exam_preparation_tips
+
+
+- story: Privacy policy inquiry
+  steps:
+  - intent: privacy_concerns
+  - action: utter_privacy_policy
+
+- story: Analysis methodology explanation
+  steps:
+    - intent: analysis_parameters
+    - action: utter_analysis_methodology
+
+- story: Supported formats inquiry
+  steps:
+    - intent: document_format
+    - action: utter_supported_formats
+
+- story: Profile Navigation
+  steps:
+  - intent: profile_navigation_issue
+  - action: utter_profile_navigation
+
+    
+
+# Fallback flows
+- story: Fallback story
+  steps:
+  - intent: out_of_scope
+  - action: utter_default

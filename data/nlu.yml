@@ -19,6 +19,8 @@ nlu:
     - Are you a bot?
     - Are you human?
     - What are you?
+    
+    
 - intent: feedback
   examples: |
     - This was helpful
@@ -64,7 +66,39 @@ nlu:
     - List your skills
     - Describe your abilities
     - What services do you offer?
-    - Can you analyze question papers?
+    - What are your features?
+    - Tell me your skills
+    - help me please
+    - help 
+    - I need help
+    - How do I use this chatbot?
+    - Guide me through this system
+    - I am confused, what do I do?
+    - Where can I find more information?
+    - Assist me please
+    - Can you help me?
+    - I don't understand
+    - Show me how this works
+    - Instructions please
+
+
+- intent: inform
+  examples: |
+    - [computer Science engineering](department)
+    - [sem 3](semester)
+    - [2019 pattern](pattern)
+    - I want the [IT](department) department
+    - [second semester](semester)
+    - papers for [sem 4](semester)
+    - [2015 pattern](pattern)
+    - I want [Computer Science Engineering](department) papers for [sem 3](semester) in [THEORY OF COMPUTATION](selected_subject) from the [2019](pattern) pattern
+    - [Endsem 2019 pattern](pattern) for [System Programming and operating System](selected_subject)
+    - [Endsem 2019 pattern](pattern) for [DATABASE MANAGEMENT SYSTEMS](selected_subject)
+    - [Endsem 2019 pattern](pattern) for [COMPUTER NETWORKS & SECURITY](selected_subject)
+    - [Endsem 2019 pattern](pattern) for [THEORY OF COMPUTATION](selected_subject)
+
+
+    - [Insem 2015 pattern](pattern) [Computer Engineering](department) [sem 5](semester)
 
 
 
@@ -97,7 +131,6 @@ nlu:
 - intent: upload_question_paper
   examples: |
     - I want to upload a question paper
-    - Can you analyze this [exam paper](document_type)?
     - Check this [PDF](document_type) for common questions
     - Find repeated questions in this document
     - Analyze this [exam paper](document_type)
@@ -121,10 +154,6 @@ nlu:
     - Not really
     - I don't think so
 
-- intent: inform
-  examples: |
-    - My email is user@example.com
-    - I'm having trouble with my login
 
 - intent: mood_great
   examples: |
@@ -135,6 +164,33 @@ nlu:
   examples: |
     - I'm not feeling well
     - I feel sad
+
+
+
+- intent: request_paper_analysis
+  examples: |
+    - I want to analyze some papers from the web
+    - Can you find question papers for me online?
+    - Analyze papers from the university site
+    - Fetch papers for [computer engineering](department)
+    - can you analyze question papers form web 
+    - I want to start a web analysis
+    - Access papers from the web
+    - can you analyze question papers from the web
+    - analyze question papers from the internet
+    - fetch question papers online
+    - get papers from sppu website
+    - collect previous year papers from the web
+    - analyze university question papers from the website
+    - fetch and analyze papers for me
+    - download question papers and analyze them
+    - analyze all papers available online
+    - start web paper analysis
+    - check papers from sppu site
+    - get me question papers from the internet
+    - look for question papers online
+    - analyze papers from the website
+    - start fetching papers from the web
 
 - intent: predictive_analysis
   examples: |
@@ -151,16 +207,16 @@ nlu:
 
 - intent: subject_analysis
   examples: |
-    - What are the key topics in [Mathematics](subject)?
-    - Show important questions in [Physics](subject)
-    - Find commonly asked [Chemistry](subject) equations
-    - What are the most frequent [programming](subject) questions?
-    - Give me a summary of important [Biology](subject) concepts
-    - Analyze [Computer Science](subject) past papers
-    - What's important in [Economics](subject) exams?
-    - Highlight key [History](subject) topics
-    - Breakdown [Engineering](subject) questions
-    - Summarize [Literature](subject) exam patterns
+    - What are the key topics in [DSA](selected_subject)?
+    - Show important questions in [SPOS](selected_subject)
+    - Find commonly asked [MicroProcessor](selected_subject) equations
+    - What are the most frequent [DBMS](selected_subject) questions?
+    - Give me a summary of important [CG](selected_subject) concepts
+    - Analyze [TOC](selected_subject) past papers
+    - What's important in [DM](selected_subject) exams?
+    - Highlight key [DSA](selected_subject) topics
+    - Breakdown [TOC](selected_subject) questions
+    - Summarize [HCI](selected_subject) exam patterns
 
 - intent: study_plan
   examples: |
@@ -171,7 +227,7 @@ nlu:
     - How do I prepare based on [past papers](document_type)?
     - Guide me in making a study timetable
     - Create a personalized [2 week](study_duration) schedule
-    - Recommend a preparation strategy for [Mathematics](subject)
+    - Recommend a preparation strategy for [DSA](selected_subject)
     - Design a learning roadmap
     - Make me a [90 day](study_duration) revision plan
     - Organize my study sessions
@@ -183,7 +239,7 @@ nlu:
     - What are some good study techniques?
     - How do I manage time during [3 hour](time_limit) exams?
     - Suggest a method to memorize key concepts
-    - Best ways to study for [physics](subject) tests
+    - Best ways to study for [SPOS](selected_subject) tests
     - Exam success strategies
     - How to avoid exam stress
     - Techniques for better retention
@@ -199,8 +255,8 @@ nlu:
     - Give me an [advanced level](difficulty_level) exam simulation
     - Prepare a [chapter-wise](document_type) practice exam
     - Make a [50 question](question_count) test for me to try
-    - I need a [biology](subject) sample quiz
-    - Create an [engineering mathematics](subject) assessment
+    - I need a [DSA](selected_subject) sample quiz
+    - Create an [DM](selected_subject) assessment
 
 - intent: general_small_talk
   examples: |
@@ -215,18 +271,6 @@ nlu:
     - What's the weather today?
     - Are you happy?
 
-- intent: help
-  examples: |
-    - I need help
-    - How do I use this chatbot?
-    - Guide me through this system
-    - I am confused, what do I do?
-    - Where can I find more information?
-    - Assist me please
-    - Can you help me?
-    - I don't understand
-    - Show me how this works
-    - Instructions please
 
 - intent: profile_navigation_issue
   examples: |
@@ -309,12 +353,12 @@ nlu:
 - intent: time_estimation
   examples: |
     - How long does [PDF analysis](document_type) take?
-    - When will [chemistry paper](subject) results be ready?
+    - When will [chemistry paper](selected_subject) results be ready?
     - Is [DOCX processing](document_type) instant?
     - What's the processing time for [50 pages](document_type)?
     - Can you hurry up?
     - Speed up the analysis
     - Why is [my document](document_type) taking so long?
-    - Estimated completion time for [physics test](subject)
+    - Estimated completion time for [physics test](selected_subject)
     - Processing duration
-    - When can I expect [biology results](subject)?
+    - When can I expect [biology results](selected_subject)?
