@@ -1,4 +1,3 @@
-# This is your new, clean domain.yml file
 version: "3.1"
 
 intents:
@@ -32,7 +31,7 @@ intents:
   - privacy_concerns
   - positive_feedback
   - negative_feedback
-  - out_of_scope # This was missing from stories.yml
+  - out_of_scope
 
 entities:
   - department
@@ -49,7 +48,7 @@ entities:
   - difficulty_level
   - question_count
   - time_limit
-  - selected_subject # Added to fix form errors
+  - selected_subject 
 
 slots:
   department:
@@ -114,7 +113,7 @@ slots:
         entity: difficulty_level
 
 responses:
-  # --- Core Responses ---
+
   utter_greet:
     - text: "Hello! How can I assist you today?"
     - text: "Hi there! Ready to ace your exams?"
@@ -145,8 +144,6 @@ responses:
     - text: "I'm not sure how to help with that. Could you rephrase?"
   utter_help_options:
     - text: "I can help with:\n- Document analysis\n- Study planning\n- Website navigation\nWhat do you need assistance with?"
-  
-  # --- Feature Responses ---
   utter_bot_capabilities:
     - text: "I can help with: \n- Analyzing question papers\n- Predicting important topics\n- Creating study plans\n- Generating mock tests\n- Navigating website content\nAsk me anything about exam preparation!"
   utter_processing_time:
@@ -169,8 +166,6 @@ responses:
     - text: "I support both PDF and DOCX formats. Scanned documents should be searchable PDFs."
   utter_profile_navigation:
     - text: "To access your profile, click on the top-right icon and then select 'Profile'."
-
-  # --- DEAD CODE (Can be deleted, but harmless) ---
   utter_positive_feedback_response:
     - text: "Thank you for your kind feedback! We're glad to help."
   utter_negative_feedback_response:
@@ -188,8 +183,6 @@ responses:
   utter_offer_more_assistance:
     - text: "Is there anything else I can assist you with?"
 
-# This 'actions' list is now 100% correct
-# It matches your actions.py file
 actions:
   - action_fetch_and_analyze
   - action_handle_navigation
